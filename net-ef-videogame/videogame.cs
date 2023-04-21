@@ -6,7 +6,6 @@ using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
-//Devono essere presenti tutte le funzionalità dell’esercizio originale.
 //Aggiungiamo anche un’altra voce al menu :
 //inserisci una nuova software house
 //Fatto questo, ogni volta che creiamo un nuovo videogioco dobbiamo abbinargli la software house che l’ha prodotto (che dobbiamo aver precedentemente inserito in tabella), chiedendo all’utente l’id della software house e impostandolo nell’entity del videogame.
@@ -20,13 +19,27 @@ namespace net_ef_videogame
     //[Table("videogames")]  //per cambiare il nome
     public class Videogame
     {
-        [Key] public string VideogameId { get; set; }
+        [Key] public int VideogameId { get; set; }
         [Required] public string Name { get; set; }
         public string? Overview { get; set; }
         public DateTime ReleaseDate { get; set; }
         
         public int SoftwareHouseId { get; set; }
-        //public SoftwareHouse SoftwareHouse { get; set; }
 
+        //one (SoftwareHouse) to many (Videogames)
+        public SoftwareHouse SoftwareHouse { get; set; }
+
+        public Videogame(int videogameId, string name, string? overview, DateTime releaseDate, int softwareHouseId)
+        {
+            VideogameId = videogameId; 
+            Name = name;
+            Overview = overview;
+            ReleaseDate = releaseDate;
+            SoftwareHouseId = softwareHouseId;
+        }
+
+        public Videogame()
+        {
+        }
     }
 }
