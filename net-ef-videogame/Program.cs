@@ -13,11 +13,10 @@ namespace net_ef_videogame
 
             Console.WriteLine("1 | Inserisci un nuovo videogioco");
             Console.WriteLine("2 | Inserisci una nuova software house");
-            Console.WriteLine("3 | Ricerca uno o più videogiochi per nome");
+            Console.WriteLine("3 | Ricerca uno o più videogiochi per nome o parti del nome");
             Console.WriteLine("4 | Ricerca un videogioco per id");
             Console.WriteLine("5 | Stampa la lista dei videogiochi");
             Console.WriteLine("6 | Cancella un videogioco \n");
-
 
             key = Console.ReadKey(true);
 
@@ -35,7 +34,7 @@ namespace net_ef_videogame
 
                 case '3':
                     Console.Clear();
-                    VideogameManager.SearchVideogameName();
+                    VideogameManager.SearchVideogamesName();
                     break;
 
                 case '4':

@@ -78,22 +78,22 @@ namespace net_ef_videogame
             }
         }
 
-        public static void SearchVideogameName()
+        //ricerca videogichi attraverso elementi che fanno parte del nome
+        public static void SearchVideogamesName()
         {
             using (VideogameContext db = new VideogameContext())
             {
                 try
                 {
-                    Console.WriteLine("Scrivi il nome del videogioco che vuoi cercare.");
+                    Console.WriteLine("Scrivi il nome o parti del nome del/dei videogiochi che vuoi cercare.");
                     string vgName = Console.ReadLine();
                     Console.WriteLine();
 
-                    List<Videogame> videogames = db.Videogames.OrderBy(videogame => videogame.Name).ToList<Videogame>();
+                    List<Videogame> videogames = db.Videogames.Where(vg => vg.Name.Contains(vgName)).ToList();
 
                     foreach (Videogame videogame in videogames)
                     {
-                        if (vgName == videogame.Name)
-                            Console.WriteLine($"Id: '{videogame.VideogameId}', Name: '{videogame.Name}', Overview: '{videogame.Overview}', Relase date: '{videogame.ReleaseDate}' \n");
+                        Console.WriteLine($"Id: '{videogame.VideogameId}', Name: '{videogame.Name}', Overview: '{videogame.Overview}', Relase date: '{videogame.ReleaseDate}' \n");
                     }
                 }
                 catch (Exception ex)
