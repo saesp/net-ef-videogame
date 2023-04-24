@@ -20,8 +20,7 @@ namespace net_ef_videogame
             Console.WriteLine("3 | Ricerca un videogioco per nome");
             Console.WriteLine("4 | Ricerca un videogioco per id");
             Console.WriteLine("5 | Stampa la lista dei videogiochi");
-
-            Console.WriteLine("6 | Cancella un videogioco");
+            Console.WriteLine("6 | Cancella un videogioco \n");
 
 
             key = Console.ReadKey(true);
@@ -53,10 +52,10 @@ namespace net_ef_videogame
                     VideogameManager.ReadVideogames();
                     break;
 
-                    //case '6':
-                    //    Console.Clear();
-                    //    VideogameManager.DeleteVideogame();
-                    //    break;
+                case '6':
+                    Console.Clear();
+                    VideogameManager.DeleteVideogame();
+                    break;
             }
         }
     }

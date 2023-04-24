@@ -110,14 +110,14 @@ namespace net_ef_videogame
                 try
                 {
                     Console.WriteLine("Scrivi l'Id del videogioco che vuoi cercare.");
-                    int vgName = Convert.ToInt32(Console.ReadLine());
+                    int vgId = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine();
 
-                    List<Videogame> videogames = db.Videogames.OrderBy(videogame => videogame.VideogameId).ToList<Videogame>();
+                    List<Videogame> videogames = db.Videogames.OrderBy(vg => vg.VideogameId).ToList<Videogame>();
 
                     foreach (Videogame videogame in videogames)
                     {
-                        if (vgName == videogame.VideogameId)
+                        if (vgId == videogame.VideogameId)
                             Console.Write($"Id: '{videogame.VideogameId}', Name: '{videogame.Name}', Overview: '{videogame.Overview}', Relase date: '{videogame.ReleaseDate}' \n");
                     }
                 }
@@ -134,9 +134,9 @@ namespace net_ef_videogame
             {
                 try
                 {
-                    Console.WriteLine("Lista di videogiochi: \n");
+                    Console.WriteLine("Lista dei videogiochi: \n");
 
-                    List<Videogame> videogames = db.Videogames.OrderBy(videogame => videogame.Name).ToList<Videogame>();
+                    List<Videogame> videogames = db.Videogames.OrderBy(vg => vg.Name).ToList<Videogame>();
 
                     foreach (Videogame videogame in videogames)
                     {
@@ -150,24 +150,34 @@ namespace net_ef_videogame
             }
         }
 
-        //public static void DeleteVideogame()
-        //{
-        //    using (VideogameContext db = new VideogameContext())
-        //    {
-        //        try
-        //        {
-        //            List<Videogame> videogames = db.Videogames.OrderBy(vg => vg.VideogameId).ToList<Videogame>();
+        public static void DeleteVideogame()
+        {
+            using (VideogameContext db = new VideogameContext())
+            {
+                try
+                {
+                    Console.WriteLine("Scrivi l'Id del videogioco che vuoi rimuovere.");
+                    int vgId = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine();
 
-        //            db.Remove(vg);
-        //            db.SaveChanges();
+                    List<Videogame> videogames = db.Videogames.OrderBy(vg => vg.VideogameId).ToList<Videogame>();
 
-        //            Console.WriteLine($"Inserito record nella tabella Videogame");
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Console.WriteLine($"ERRORE: {ex.Message}");
-        //        }
-        //    }
-        //}
+                    foreach (Videogame videogame in videogames)
+                    {
+                        if (vgId == videogame.VideogameId)
+                        {
+                            db.Remove(videogame);
+                            db.SaveChanges();
+                        }
+                    }
+
+                    Console.WriteLine($"Videogame rimosso dalla tabella Videogame.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"ERRORE: {ex.Message}");
+                }
+            }
+        }
     }
 }
