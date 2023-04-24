@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace net_ef_videogame
 {
-    internal class VideogameManager
+    public class VideogameManager
     {
         public static void CreateVideogame()
         {
@@ -77,5 +77,97 @@ namespace net_ef_videogame
                 }
             }
         }
+
+        public static void SearchVideogameName()
+        {
+            using (VideogameContext db = new VideogameContext())
+            {
+                try
+                {
+                    Console.WriteLine("Scrivi il nome del videogioco che vuoi cercare.");
+                    string vgName = Console.ReadLine();
+                    Console.WriteLine();
+
+                    List<Videogame> videogames = db.Videogames.OrderBy(videogame => videogame.Name).ToList<Videogame>();
+
+                    foreach (Videogame videogame in videogames)
+                    {
+                        if (vgName == videogame.Name)
+                            Console.WriteLine($"Id: '{videogame.VideogameId}', Name: '{videogame.Name}', Overview: '{videogame.Overview}', Relase date: '{videogame.ReleaseDate}' \n");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"ERRORE: {ex.Message}");
+                }
+            }
+        }
+
+        public static void SearchVideogameId()
+        {
+            using (VideogameContext db = new VideogameContext())
+            {
+                try
+                {
+                    Console.WriteLine("Scrivi l'Id del videogioco che vuoi cercare.");
+                    int vgName = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine();
+
+                    List<Videogame> videogames = db.Videogames.OrderBy(videogame => videogame.VideogameId).ToList<Videogame>();
+
+                    foreach (Videogame videogame in videogames)
+                    {
+                        if (vgName == videogame.VideogameId)
+                            Console.Write($"Id: '{videogame.VideogameId}', Name: '{videogame.Name}', Overview: '{videogame.Overview}', Relase date: '{videogame.ReleaseDate}' \n");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"ERRORE: {ex.Message}");
+                }
+            }
+        }
+
+        public static void ReadVideogames()
+        {
+            using (VideogameContext db = new VideogameContext())
+            {
+                try
+                {
+                    Console.WriteLine("Lista di videogiochi: \n");
+
+                    List<Videogame> videogames = db.Videogames.OrderBy(videogame => videogame.Name).ToList<Videogame>();
+
+                    foreach (Videogame videogame in videogames)
+                    {
+                        Console.WriteLine($"Id: '{videogame.VideogameId}', Name: '{videogame.Name}', Overview: '{videogame.Overview}', Relase date: '{videogame.ReleaseDate}' \n");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"ERRORE: {ex.Message}");
+                }
+            }
+        }
+
+        //public static void DeleteVideogame()
+        //{
+        //    using (VideogameContext db = new VideogameContext())
+        //    {
+        //        try
+        //        {
+        //            List<Videogame> videogames = db.Videogames.OrderBy(vg => vg.VideogameId).ToList<Videogame>();
+
+        //            db.Remove(vg);
+        //            db.SaveChanges();
+
+        //            Console.WriteLine($"Inserito record nella tabella Videogame");
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            Console.WriteLine($"ERRORE: {ex.Message}");
+        //        }
+        //    }
+        //}
     }
 }
