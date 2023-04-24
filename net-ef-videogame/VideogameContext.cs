@@ -14,7 +14,7 @@ namespace net_ef_videogame
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=db-net-ef-videogame;Integrated Security=True"); //la stringa di connessione esegue il collegamento al db
+            optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=db-net-ef-videogame;Integrated Security=True; TrustServerCertificate=True"); //la stringa di connessione esegue il collegamento al db
 
             // optionsBuilder serve a settare il tipo di db usato e la stringa di connessione
         }
